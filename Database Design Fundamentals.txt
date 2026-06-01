@@ -238,3 +238,158 @@ FROM table
 Key Learning:
 - Indexes reduce full table scans
 - Too many indexes can slow writes
+
+
+11. Database Transactions
+
+Learned how databases group multiple operations into a single unit.
+
+Commands:
+
+START TRANSACTION
+
+COMMIT
+
+ROLLBACK
+
+Purpose:
+
+Ensure multiple operations execute safely together.
+
+Example:
+
+Money Transfer:
+
+Deduct money from Account A
+
+Add money to Account B
+
+Commit changes
+
+If failure occurs:
+
+Rollback transaction
+
+Benefits:
+
+Maintains consistency
+
+Prevents partial updates
+
+
+
+12. Concurrency Control and Locking
+
+Studied how databases handle multiple users accessing same data simultaneously.
+
+Types of Locks:
+
+Shared Lock (Read Lock)
+
+Exclusive Lock (Write Lock)
+
+Row Level Locking
+
+Table Level Locking
+
+Purpose:
+
+Prevent conflicts during simultaneous transactions.
+
+Example:
+
+User A updating balance
+
+User B trying to modify same balance
+
+Lock prevents inconsistent data.
+
+
+
+13. Database Views
+
+Learned about virtual tables created from queries.
+
+Create View:
+
+CREATE VIEW customer_view AS
+SELECT name, email
+FROM customers;
+
+Delete View:
+
+DROP VIEW customer_view;
+
+Purpose:
+
+Hide sensitive columns
+
+Simplify complex queries
+
+Reusable query logic
+
+Improve security
+
+
+
+14. Pagination
+
+Learned how databases fetch limited records efficiently.
+
+Syntax:
+
+LIMIT number
+
+OFFSET number
+
+Example:
+
+SELECT *
+FROM booking
+LIMIT 5
+OFFSET 10;
+
+Meaning:
+
+Skip first 10 rows
+
+Return next 5 rows
+
+Purpose:
+
+Improve performance
+
+Handle large datasets
+
+Useful for page-wise data display
+
+
+
+
+15. Transaction Isolation Levels
+
+Studied how transactions are isolated from each other.
+
+Isolation Levels:
+
+Read Uncommitted
+- Allows dirty reads
+
+Read Committed
+- Prevents dirty reads
+
+Repeatable Read
+- Prevents non-repeatable reads
+- MySQL default
+
+Serializable
+- Highest isolation
+- Most strict
+
+Problems Solved:
+
+Dirty Reads
+
+Non-repeatable Reads
+
+Phantom Reads
