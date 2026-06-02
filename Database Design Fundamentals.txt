@@ -393,3 +393,1283 @@ Dirty Reads
 Non-repeatable Reads
 
 Phantom Reads
+
+
+16. Database Transactions
+
+A transaction is a group of SQL operations executed as a single unit.
+
+Properties (ACID):
+
+Atomicity
+
+Consistency
+
+Isolation
+
+Durability
+
+Purpose:
+
+Maintain data integrity
+
+Prevent partial updates
+
+
+17. Transaction Isolation Levels
+
+Controls how transactions interact with each other.
+
+Types:
+
+Read Uncommitted
+
+Read Committed
+
+Repeatable Read
+
+Serializable
+
+Purpose:
+
+Reduce concurrency problems
+
+Control data visibility
+
+
+18. Dirty Read Problem
+
+Occurs when one transaction reads uncommitted data from another transaction.
+
+Problem:
+
+Transaction A updates data
+
+Transaction B reads it
+
+Transaction A rolls back
+
+Transaction B used invalid data
+
+
+19. Non-Repeatable Read
+
+Occurs when same query returns different results inside one transaction.
+
+Example:
+
+Read salary = 1000
+
+Another transaction updates salary
+
+Read again = 1200
+
+
+20. Phantom Read
+
+Occurs when rows appear/disappear between queries.
+
+Example:
+
+Query returns 10 rows
+
+Another transaction inserts row
+
+Query returns 11 rows
+
+
+21. Locking Concepts
+
+Used to control concurrent access.
+
+Types:
+
+Shared Lock
+
+Exclusive Lock
+
+Row Level Lock
+
+Table Level Lock
+
+Purpose:
+
+Prevent conflicts
+
+Maintain consistency
+
+
+22. Optimistic Locking
+
+Assumes conflicts are rare.
+
+Uses:
+
+Version column
+
+Checks before update
+
+Best for:
+
+High read systems
+
+
+23. Pessimistic Locking
+
+Locks resource immediately.
+
+Purpose:
+
+Prevent concurrent modification
+
+Best for:
+
+High write systems
+
+
+24. Database Indexing Basics
+
+Indexes improve query speed.
+
+Types:
+
+Primary Index
+
+Unique Index
+
+Composite Index
+
+Benefits:
+
+Faster search
+
+Reduced scan time
+
+
+25. Clustered vs Non-Clustered Index
+
+Clustered:
+
+Stores actual table data order
+
+One per table
+
+Non-Clustered:
+
+Separate structure
+
+Stores pointers to data
+
+Can have multiple indexes
+
+
+
+26. Composite Index
+
+A composite index is created on multiple columns.
+
+Example:
+
+INDEX(firstname, lastname)
+
+Purpose:
+
+Improve multi-column searches
+
+Reduce query execution time
+
+Best Use:
+
+Queries using multiple WHERE conditions
+
+
+27. Covering Index
+
+An index that contains all required columns for a query.
+
+Benefit:
+
+Database retrieves data directly from index
+
+Reduces table access
+
+Improves performance
+
+
+28. Query Optimization Basics
+
+Process of improving SQL performance.
+
+Techniques:
+
+Use indexes
+
+Avoid SELECT *
+
+Reduce joins
+
+Use WHERE clauses properly
+
+Purpose:
+
+Faster execution
+
+Lower resource usage
+
+
+29. Explain Plan / EXPLAIN Command
+
+Used to analyze query execution.
+
+Purpose:
+
+Understand index usage
+
+Detect full table scans
+
+Optimize slow queries
+
+Example:
+
+EXPLAIN SELECT * FROM users;
+
+
+30. Full Table Scan
+
+Occurs when database checks every row.
+
+Problem:
+
+Slow performance
+
+High resource usage
+
+Usually happens when:
+
+No indexes exist
+
+Poor query design
+
+
+31. Database Normalization
+
+Process of reducing redundancy.
+
+Goals:
+
+Remove duplicate data
+
+Improve consistency
+
+Save storage
+
+
+32. First Normal Form (1NF)
+
+Rules:
+
+No repeating groups
+
+Atomic values only
+
+Example:
+
+Store one phone number per field
+
+
+33. Second Normal Form (2NF)
+
+Requirements:
+
+Must satisfy 1NF
+
+Remove partial dependency
+
+Purpose:
+
+Reduce duplicate storage
+
+
+34. Third Normal Form (3NF)
+
+Requirements:
+
+Must satisfy 2NF
+
+Remove transitive dependency
+
+Purpose:
+
+Better database design
+
+Less redundancy
+
+
+35. Denormalization
+
+Process of intentionally adding redundancy.
+
+Purpose:
+
+Improve read performance
+
+Reduce joins
+
+Tradeoff:
+
+More storage usage
+
+
+
+36. Database Views
+
+A view is a virtual table created from SQL queries.
+
+Purpose:
+
+Hide complexity
+
+Improve security
+
+Reuse queries
+
+Example:
+
+CREATE VIEW active_users AS
+SELECT * FROM users
+WHERE status='ACTIVE';
+
+
+37. Materialized Views
+
+Stores query results physically.
+
+Benefits:
+
+Faster reads
+
+Reduced recalculation
+
+Tradeoff:
+
+Needs refresh
+
+
+38. Stored Procedures
+
+Predefined SQL code stored in database.
+
+Purpose:
+
+Reuse logic
+
+Improve performance
+
+Reduce repeated queries
+
+
+39. Functions in Database
+
+Reusable database operations that return values.
+
+Examples:
+
+SUM()
+
+COUNT()
+
+Custom functions
+
+Benefits:
+
+Cleaner queries
+
+Reusability
+
+
+40. Triggers
+
+Automatically execute when events happen.
+
+Events:
+
+INSERT
+
+UPDATE
+
+DELETE
+
+Use Cases:
+
+Audit logs
+
+Validation
+
+Automatic updates
+
+
+41. Database Partitioning
+
+Splits large tables into smaller parts.
+
+Benefits:
+
+Better performance
+
+Faster queries
+
+Types:
+
+Horizontal Partitioning
+
+Vertical Partitioning
+
+
+42. Horizontal Partitioning
+
+Rows divided across partitions.
+
+Example:
+
+Users table split by country.
+
+Benefits:
+
+Scalability
+
+Load distribution
+
+
+43. Vertical Partitioning
+
+Columns divided into separate tables.
+
+Example:
+
+Move large text fields to another table.
+
+Benefits:
+
+Reduce unnecessary reads
+
+Improve efficiency
+
+
+44. Sharding
+
+Distributes data across multiple databases.
+
+Purpose:
+
+Handle huge datasets
+
+Improve scalability
+
+Example:
+
+Users A-M → Server 1
+
+Users N-Z → Server 2
+
+
+45. Replication
+
+Copies data across multiple databases.
+
+Purpose:
+
+High availability
+
+Disaster recovery
+
+Load balancing
+
+Types:
+
+Master-Slave
+
+Master-Master
+
+
+
+
+46. Entity Relationship (ER) Model
+
+Used for database design.
+
+Components:
+
+Entities
+
+Attributes
+
+Relationships
+
+Purpose:
+
+Visualize database structure
+
+Improve schema planning
+
+
+47. Entity Relationship Diagram (ER Diagram)
+
+Graphical representation of database.
+
+Contains:
+
+Tables
+
+Relationships
+
+Keys
+
+Purpose:
+
+Understand database structure easily
+
+
+48. Primary Key
+
+Uniquely identifies records.
+
+Properties:
+
+Unique
+
+Not Null
+
+One primary key per table
+
+Example:
+
+user_id
+
+
+49. Foreign Key
+
+Creates relationship between tables.
+
+Purpose:
+
+Maintain referential integrity
+
+Example:
+
+user_id in orders table
+
+
+50. Candidate Key
+
+Columns that can uniquely identify rows.
+
+Example:
+
+Email
+
+Phone Number
+
+One becomes primary key
+
+
+51. Super Key
+
+Set of columns that uniquely identify records.
+
+Example:
+
+ID
+
+ID + Name
+
+ID + Email
+
+
+52. Alternate Key
+
+Candidate keys not selected as primary key.
+
+Example:
+
+Primary Key = ID
+
+Alternate Key = Email
+
+
+53. One-to-One Relationship (1:1)
+
+One row relates to one row.
+
+Example:
+
+User ↔ Passport
+
+
+54. One-to-Many Relationship (1:M)
+
+One record connects to many records.
+
+Example:
+
+Customer → Orders
+
+
+55. Many-to-Many Relationship (M:M)
+
+Many records connect to many records.
+
+Implemented using:
+
+Junction Table
+
+Example:
+
+Students ↔ Courses
+
+
+56. Referential Integrity
+
+Ensures valid relationships.
+
+Prevents:
+
+Orphan records
+
+Invalid references
+
+
+57. Database Constraints
+
+Rules applied on columns.
+
+Types:
+
+NOT NULL
+
+UNIQUE
+
+CHECK
+
+DEFAULT
+
+PRIMARY KEY
+
+
+58. Unique Constraint
+
+Prevents duplicate values.
+
+Example:
+
+Email unique
+
+
+59. Check Constraint
+
+Restricts allowed values.
+
+Example:
+
+Age > 18
+
+
+60. Default Constraint
+
+Provides default values.
+
+Example:
+
+status = ACTIVE
+
+
+61. Cascading Operations
+
+Automatically propagates actions.
+
+Types:
+
+CASCADE DELETE
+
+CASCADE UPDATE
+
+Purpose:
+
+Maintain consistency
+
+
+62. ON DELETE CASCADE
+
+Deleting parent deletes children.
+
+Example:
+
+Delete user
+
+↓
+
+Delete user orders
+
+
+63. ON DELETE SET NULL
+
+Parent deleted.
+
+Child reference becomes NULL.
+
+
+64. Junction Table
+
+Used for Many-to-Many relationships.
+
+Example:
+
+student_course
+
+Contains:
+
+student_id
+
+course_id
+
+
+65. Database Cardinality
+
+Defines relationship count.
+
+Types:
+
+1:1
+
+1:M
+
+M:M
+
+Purpose:
+
+Relationship design
+
+
+
+
+66. SQL Joins Basics
+
+Used to combine tables.
+
+Types:
+
+INNER JOIN
+
+LEFT JOIN
+
+RIGHT JOIN
+
+FULL JOIN
+
+Purpose:
+
+Fetch related data
+
+
+67. INNER JOIN
+
+Returns matching rows only.
+
+Example:
+
+Users with orders only.
+
+
+68. LEFT JOIN
+
+Returns all left table rows.
+
+Missing matches become NULL.
+
+
+69. RIGHT JOIN
+
+Returns all right table rows.
+
+Less commonly used.
+
+
+70. SELF JOIN
+
+Table joins with itself.
+
+Use Cases:
+
+Employee → Manager relationships
+
+
+71. Cross Join
+
+Creates Cartesian Product.
+
+Rows:
+
+m × n rows generated.
+
+
+72. Subqueries
+
+Query inside another query.
+
+Types:
+
+Nested Query
+
+Correlated Query
+
+
+73. Correlated Subquery
+
+Inner query depends on outer query.
+
+Usually slower.
+
+
+74. Common Table Expressions (CTE)
+
+Temporary result set.
+
+Uses:
+
+Complex queries
+
+Readable SQL
+
+Example:
+
+WITH employee_cte AS (...)
+
+
+75. Recursive CTE
+
+CTE calling itself.
+
+Use Cases:
+
+Hierarchy traversal
+
+Tree structures
+
+
+76. Window Functions
+
+Perform calculations across rows.
+
+Examples:
+
+ROW_NUMBER()
+
+RANK()
+
+DENSE_RANK()
+
+
+77. Aggregate Functions
+
+Operate on multiple rows.
+
+Examples:
+
+COUNT()
+
+AVG()
+
+SUM()
+
+MAX()
+
+MIN()
+
+
+78. Group By
+
+Groups rows.
+
+Often used with aggregates.
+
+Example:
+
+GROUP BY department
+
+
+79. HAVING Clause
+
+Filters grouped data.
+
+Difference:
+
+WHERE → before grouping
+
+HAVING → after grouping
+
+
+80. Database Connection Pooling
+
+Reuses DB connections.
+
+Benefits:
+
+Better performance
+
+Less overhead
+
+Example:
+
+HikariCP
+
+
+81. Caching Concepts
+
+Store frequently used data.
+
+Benefits:
+
+Reduce DB load
+
+Faster response
+
+
+82. ACID vs BASE
+
+ACID:
+
+Strong consistency
+
+BASE:
+
+High availability
+
+Used in distributed systems
+
+
+83. CAP Theorem
+
+Three properties:
+
+Consistency
+
+Availability
+
+Partition Tolerance
+
+Only two can be prioritized.
+
+
+84. Backup and Recovery
+
+Protect data.
+
+Types:
+
+Full Backup
+
+Incremental Backup
+
+Recovery Plans
+
+
+85. Database Migration Tools
+
+Manage schema changes.
+
+Examples:
+
+Flyway
+
+Liquibase
+
+Benefits:
+
+Version control for DB
+
+
+
+86. Read Replica
+
+Copy of primary database for read operations.
+
+Purpose:
+
+Reduce load
+
+Improve scalability
+
+Separate reads from writes
+
+
+87. Write Replica / Primary Database
+
+Handles write operations.
+
+INSERT
+
+UPDATE
+
+DELETE
+
+Usually replication source.
+
+
+88. Eventual Consistency
+
+Data becomes consistent after some time.
+
+Common in:
+
+Distributed systems
+
+NoSQL databases
+
+
+89. Strong Consistency
+
+All users see same data immediately.
+
+Used in:
+
+Banking systems
+
+Transactions
+
+
+90. Database Failover
+
+Switch to backup database during failure.
+
+Purpose:
+
+High availability
+
+Disaster recovery
+
+
+91. Database High Availability (HA)
+
+Keep database running continuously.
+
+Methods:
+
+Replication
+
+Clustering
+
+Failover
+
+
+92. Database Clustering
+
+Multiple DB servers work together.
+
+Benefits:
+
+Scalability
+
+Fault tolerance
+
+
+93. Vertical Scaling
+
+Increase machine resources.
+
+Example:
+
+More RAM
+
+More CPU
+
+
+94. Horizontal Scaling
+
+Add more servers.
+
+Benefits:
+
+Better scalability
+
+
+95. Database Bottlenecks
+
+Performance limitations.
+
+Examples:
+
+Slow queries
+
+Missing indexes
+
+Too many joins
+
+
+96. Hotspot Problem
+
+Too many requests on one node.
+
+Causes:
+
+Uneven data distribution
+
+
+97. Data Consistency Models
+
+Ways systems maintain consistency.
+
+Examples:
+
+Strong
+
+Weak
+
+Eventual
+
+
+98. Database Deadlock
+
+Two transactions wait forever.
+
+Example:
+
+Transaction A waits for B
+
+Transaction B waits for A
+
+
+99. Deadlock Prevention
+
+Ways to avoid deadlocks.
+
+Methods:
+
+Lock ordering
+
+Short transactions
+
+
+100. Starvation
+
+Transaction waits indefinitely.
+
+Occurs because:
+
+Resources always allocated elsewhere
+
+
+101. Database Auditing
+
+Track changes.
+
+Stores:
+
+Who changed
+
+When changed
+
+What changed
+
+
+102. Audit Tables
+
+Separate table for history.
+
+Example:
+
+user_audit table
+
+
+103. Soft Delete Pattern
+
+Do not physically delete.
+
+Mark records:
+
+status = DELETED
+
+or
+
+is_deleted = true
+
+
+104. Hard Delete
+
+Remove row permanently.
+
+Example:
+
+DELETE FROM users;
+
+
+105. Temporal Tables
+
+Store historical versions.
+
+Purpose:
+
+Track changes over time
+
+
+106. Multi-Tenant Database Design
+
+Single system serving multiple clients.
+
+Approaches:
+
+Shared DB
+
+Separate DB
+
+
+107. Database Security Basics
+
+Protect data.
+
+Includes:
+
+Authentication
+
+Authorization
+
+Encryption
+
+
+108. SQL Injection Prevention
+
+Prevent malicious SQL execution.
+
+Methods:
+
+Prepared Statements
+
+Parameterized Queries
+
+
+109. ORM Concepts
+
+Object Relational Mapping.
+
+Examples:
+
+Hibernate
+
+JPA
+
+Benefits:
+
+Less SQL writing
+
+
+110. Database Monitoring
+
+Track database health.
+
+Monitor:
+
+CPU
+
+Queries
+
+Connections
+
+Slow queries
