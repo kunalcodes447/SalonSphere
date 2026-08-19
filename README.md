@@ -334,7 +334,6 @@ The application currently uses MySQL.
 
 Example configuration:
 
-```properties
 spring.application.name=SalonSphere
 
 spring.datasource.url=jdbc:mysql://localhost:3306/stakeholders_database
@@ -347,7 +346,7 @@ spring.jpa.show-sql=true
 
 > For deployment, database credentials should be supplied through environment variables rather than committed directly to the repository.
 
----
+(Currently using Embedded Database - H2 Database)
 
 ## ▶️ How to Run
 
