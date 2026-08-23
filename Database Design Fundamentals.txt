@@ -1,6 +1,5 @@
 Database Design Fundamentals
 
-
 1. Entity Identification
 - Identified system entities from requirements
 - Converted business objects into database tables
